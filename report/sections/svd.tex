@@ -1,0 +1,69 @@
+\section*{SVD}
+\label{sec:svd}
+
+The first method consists of finding the top-$k$ vectors from the \textbf{Singular Vector Decomposition} of the \textit{co-occurence} matrix. To create the \textit{co-occurence} matrix, we take the frequency of other words in the context ( defined by the \verb|contextSize| ) and compute the SVD to get the top dominant eigenvectors, 
+computing the word representations from the same.
+
+\subsection*{Architecture}
+I have computed the \verb|SVD| using \textbf{\textit{scipy.sparse.linalg.svds}}, with the sparse represntations from the \textbf{\textit{scipy.sparse.lil\_matrix}}. The entire code for the same in present in the \verb|src/parser.py|, which also contains the code for parsing the entire dataset and storing all the different embeddings and data for the same.
+
+\subsection*{Code}
+
+\begin{lstlisting}
+    def __getSparseCoocurenceMatrix__(self):
+        """
+            Returns a sparse co-occurence matrix
+            as a list of lists.
+        """
+        if not hasattr(self, "mapping") or self.mapping is None:
+            self.__constructBidict__()
+        
+        print("Creating sparse co-occurence matrix...")
+        matrixDimension = len(self.vocab)
+        sparseMatrix = LilMatrix((matrixDimension, matrixDimension), dtype = "float64")
+        
+        with alive_bar(len(self.tokenizedData), force_tty = True) as bar:
+            for sentence in self.tokenizedData:
+                for index, token in enumerate(sentence):
+                    windowStart = max(0, index - SVDConfig.contextWindow)
+                    for windowToken in sentence[windowStart : index]:
+                        sparseMatrix[self.mapping[token], self.mapping[windowToken]] += 1
+                        sparseMatrix[self.mapping[windowToken], self.mapping[token]] += 1
+                bar()
+        return sparseMatrix
+\end{lstlisting}
+
+In the end, I perform SVD using \textbf{\textit{scipy.sparse.linalg.svds}}. The reason for performing sparse SVD is to speed up the computation.Whereas the reason for using a sparse matrix is to improve the efficiency of using the space, for common words such as \textit{the}, \textit{a} will have a lot of words in their context, but for most of the words, there context would not be populated heavily. Therefore, using a sparse representation pays off.
+
+\begin{lstlisting}
+    def performSVD(self, sparse = True):
+        """
+            Performs SVD on the co-occurence matrix
+            @param sparse: Set to True if you want a sparse matrix representation.
+        """
+        
+        try :
+            if sparse:
+                if ( not hasattr(self, 'SparseCoOcMatrix') ):
+                    self.getCoocurenceMatrix(sparse = True)
+                
+                print("Computing SVD on sparse co-occurence matrix...")
+                U,S,Vt = SparseSVD(A = self.SparseCoOcMatrix, k = min(SVDConfig.EmbeddingSize, len(self.vocab) - 1) )
+
+                self.U = U
+                self.S = S
+                self.Vt = Vt
+            else:
+                if ( not hasattr(self, 'StochasticCoOcMatrix') ):
+                    self.getCoocurenceMatrix(sparse = False)
+                
+                U,S,Vt = DenseSVD(self.StochasticCoOcMatrix)
+                
+                self.U = U
+                self.S = S
+                self.Vt = Vt
+
+        except:
+            import traceback
+            traceback.print_exc()
+\end{lstlisting}

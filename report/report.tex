@@ -1,0 +1,92 @@
+\documentclass[a4paper,9pt]{report}
+
+\usepackage{listings}
+\usepackage{color}
+
+\usepackage{import}
+\usepackage{parskip} % For paragraph spacing
+\usepackage{xparse} % For checking if integer
+\usepackage{amsmath} % For align
+\usepackage{graphicx} % For images
+\usepackage{multirow} % Making multiline table cell
+\usepackage{array} % Centering a cell vertically
+\usepackage{booktabs} % Creating a table of figures
+\usepackage{svg} % For SVG images
+\usepackage{float} % To force things to appear as they are in code.
+
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Python,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+
+
+\usepackage[myheadings]{fullpage}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{float}
+
+\newcommand{\HRule}[1]{\rule{\linewidth}{#1}}
+\newcommand{\addpic}[1]{\includesvg[width=0.2\textwidth]{#1}}
+
+%-------------------------------------------------------------------------------
+% HEADER & FOOTER
+%-------------------------------------------------------------------------------
+\pagestyle{fancy}
+\fancyhf{}
+\setlength\headheight{15pt}
+\fancyhead[R]{Assignment 3}
+%-------------------------------------------------------------------------------
+% TITLE PAGE
+%-------------------------------------------------------------------------------
+
+% Language setting
+% Replace `english' with e.g. `spanish' to change the document language
+% \usepackage[english]{babel}
+
+% Set page size and margins
+% Replace `letterpaper' with `a4paper' for UK/EU standard size
+% \usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+
+\title{Word Vectorization}
+
+\begin{document}
+
+\title{ \normalsize \textsc{\LARGE Introduction to Natural Language Processing}
+		\\ [2.0cm]
+        \LARGE Assignment 3 
+		\HRule{0.5pt} \\
+		\LARGE \textbf{\uppercase{Word Vectorization}}
+		\HRule{2pt} \\ [0.5cm]
+		\normalsize \vspace*{3\baselineskip}}
+        \date{ }
+
+\author{Hardik Sharma}
+
+\maketitle
+
+\import{sections/}{introduction.tex}
+\import{sections/}{svd.tex}
+\import{sections/}{word2vec.tex}
+\import{sections/}{result.tex}
+\import{sections/}{conclusion.tex}
+
+\end{document}

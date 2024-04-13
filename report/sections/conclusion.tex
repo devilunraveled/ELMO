@@ -1,0 +1,14 @@
+\section*{Conclusion}
+\label{sec:conclusion}
+
+Overall, we can see that \verb|word2Vec| outperforms \verb|SVD| on the downstream task. It is also interesting to see that \verb|word2Vec| with context size 1, is similar to performance with \verb|SVD|, with context size 3. 
+
+Despite the clear domination in accuracy, it is not straightforward to choose between the two. For example, \verb|word2Vec| has a much higher accuracy, but also takes significantly more time to train. As seen from the following visualization :
+
+\begin{figure}[H]
+    \centering
+    \includesvg[width=0.5\textwidth]{../results/graphPerformance.svg}
+    \caption{Accuracy Comparison}
+\end{figure}
+
+The graph shows the time taken to prepare the two embeddings using same hardware, and it shows that although the \verb|word2Vec| model is much more accurate than \verb|SVD|, it is almost 10 times as slow. Whereas SVD has an inherent scaling issue that it scales quadratically with the vocab size, even with sparse matrix performance becomes an issue, so both these things need to be taken into account before procedding with the choice of embeddings.

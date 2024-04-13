@@ -1,0 +1,67 @@
+\section*{Word2Vec}
+\label{sec:word2vec}
+
+Here, I have implemented the \verb|skip-gram| technique for doing \textbf{\textit{Word2Vec}}, to reduce the computational cost, I have also implemented the \textit{negative-sampling} approach. The \verb|contextSize| is set thoughh the \verb|src/Config.py| file.
+
+\subsection*{Architecture}
+
+The architecture of the word2vec is straightforward, I use two embedding layers, one for the \verb|targetEmbedding| for the word and one for the \verb|contextEmbedding| of the model. Finally, I add these pair wise to get the final embedding for the word. 
+
+The positive samples are pre-computed for the model whereas the negative samples are constructed on the fly during the training. This is done through a somewhat unusual use of the custom Dataset class. 
+
+The number of negative samples per positive sample are also set from the \verb|src/Config.py| file. It contains other controllable parameters such as learning rate and embedding size.
+
+\subsection*{Code}
+Datapoints preparation.
+
+\begin{lstlisting}
+    def getWord2VecDataPoints(self):
+        self.word2VecDataPoints = []
+        print(f"Preparing data for Word2Vec...")
+        with alive_bar(len(self.tokenizedData), force_tty=True) as bar:
+            for sentence in self.tokenizedData:
+                for index, token in enumerate(sentence):
+                    window = sentence[max(0,index - Word2VecConfig.contextWindow) : index] + sentence[index + 1 : index + 1 + Word2VecConfig.contextWindow]
+                    for word in window:
+                        if word in self.vocab:
+                            self.word2VecDataPoints.append( (self.mapping[token], self.mapping[word], True) )
+                bar()
+
+    def getWordEmbedding(self, word : str) -> list:
+\end{lstlisting}
+
+The Custom Dataset class :
+\begin{lstlisting}
+class CustomDataset(TorchDataset):
+    def __init__(self, word2VecDataPoints : list, vocabLength : int) -> None:
+        self.word2VecDataPoints = word2VecDataPoints
+        self.vocabLength = vocabLength
+    
+    def __len__(self):
+        return len(self.word2VecDataPoints)*(Word2VecConfig.negativeSamples + 1)
+
+    def __getitem__(self, index):
+        actualIndex = index // (Word2VecConfig.negativeSamples + 1)
+
+        if index % (Word2VecConfig.negativeSamples + 1) == 0 :
+            dataPoint = self.word2VecDataPoints[actualIndex]
+            return dataPoint
+        else :
+            dataPoint = self.word2VecDataPoints[actualIndex]
+            randomWord = random.randint(0, self.vocabLength - 1)
+            return ( dataPoint[0], randomWord, False )
+\end{lstlisting}
+
+This helps in stochastically genrating the negative samples during training.
+
+Forward pass for the model : 
+
+\begin{lstlisting}
+    def forward(self, word, context):
+        out1 = self.contextEmbedding(context)
+        out2 = self.wordEmbedding(word)
+        out = torch.bmm(out1.unsqueeze(1), out2.unsqueeze(2)).squeeze()
+        return Sigmoid(out)
+\end{lstlisting}
+
+The embeddings for both the models are stored in the \verb|./corpus/| directory.

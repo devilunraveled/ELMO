@@ -1,0 +1,74 @@
+\section*{Results}
+\label{sec:results}
+
+Below is the graph for the model accuracy on the test data, plotted vs the time taken for training the model. From the raw data itself.
+
+Model Accuracies : 
+
+
+\begin{table}[H]
+    \centering
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Model} & \textbf{Context Size} & \textbf{Accuracy} \\
+\hline
+SVD & 1 & 82.88\% \\
+\hline
+SVD & 2 & 85.24\% \\
+\hline
+SVD & 3 & 88.65\% \\
+\hline
+Word2Vec & 1 & 88.66\% \\
+\hline
+Word2Vec & 2 & 90.22\% \\
+\hline
+Word2Vec & 3 & 90.39\% \\
+\hline
+\end{tabular}
+\end{table}
+
+Some ad
+
+\subsection*{Confusion Matrices}
+
+\subsubsection{SVD}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.3\textwidth}
+  \centering
+  \includesvg[width=\linewidth]{../results/confusionMatrix_SVD_256_1}
+  \caption{CS = 1}
+\end{minipage}%
+\begin{minipage}{0.3\textwidth}
+  \centering
+  \includesvg[width=\linewidth]{../results/confusionMatrix_SVD_256_2}
+  \caption{CS = 2}
+\end{minipage}%
+\begin{minipage}{0.3\textwidth}
+  \centering
+  \includesvg[width=\linewidth]{../results/confusionMatrix_SVD_256_3}
+  \caption{CS = 3}
+\end{minipage}
+\end{figure}
+
+\subsubsection{Word2Vec}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.3\textwidth}
+  \centering
+  \includesvg[width=\linewidth]{../results/confusionMatrix_W2V_256_1}
+  \caption{CS = 1}
+\end{minipage}%
+\begin{minipage}{0.3\textwidth}
+  \centering
+  \includesvg[width=\linewidth]{../results/confusionMatrix_W2V_256_2}
+  \caption{CS = 2}
+\end{minipage}%
+\begin{minipage}{0.3\textwidth}
+  \centering
+  \includesvg[width=\linewidth]{../results/confusionMatrix_W2V_256_3}
+  \caption{CS = 3}
+\end{minipage}
+\end{figure}
