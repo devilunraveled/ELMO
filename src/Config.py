@@ -22,10 +22,11 @@ class Structure:
 
 class Constants:
     # Custom tokens
+    padToken = "<pad>"
     startToken = "<s>"
     endToken = "</s>"
     unkToken = "<unk>"
-    customTokens = {startToken, endToken, unkToken}
+    customTokens = [padToken, startToken, endToken, unkToken]
 
     cleanser = r'(\\+|\/\/+)'
     
@@ -47,17 +48,17 @@ class Word2VecConfig(Constants):
     epochs = 10
 
     #batch size
-    batchSize = 2**7
+    batchSize = 2**0
     
 class ELMOConfig(Constants):
     # numLayers
-    numLayers = 2
+    numLayers = 1
     
     # HiddenStateSize
     hiddenStateSize = 128
 
     # dropout
-    dropout = 0.1 
+    dropout = 0 
 
     # bidirectional
     bidirectional = True
@@ -69,19 +70,21 @@ class ELMOConfig(Constants):
     numClasses = 4
 
     # prediction layer 
-    predictionLayers = (64, 32, 32)
+    predictionLayers = ()
 
     # number of epochs
     epochs = 10
     
     # batch size
-    batchSize = 2**6
+    batchSize = 2**3
     
     # classifier learning rate
     classifierLearningRate = 0.001
+    
+    numWorkers = 4
 
     # prediction learning rate
-    predictionLearningRate = 0.001
+    predictionLearningRate = 0.05
     
 class ClassificationConfig(Constants):
     # Embeddding Size
