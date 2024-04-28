@@ -10,6 +10,9 @@ class Structure:
     
     # Path to save model weights
     modelPath = os.path.join(Path(__file__).absolute().parents[1], "pretrained/")
+    
+    # Path to checkpoints
+    checkPointPath = modelPath
 
     # Train Path : corpus/train.csv
     trainPath = str(os.path.join(corpusPath, "train.csv"))
@@ -60,9 +63,6 @@ class ELMOConfig(Constants):
     # dropout
     dropout = 0 
 
-    # bidirectional
-    bidirectional = True
-    
     # classifier layer
     classifierLayers = (64, 64, 32)
     
@@ -79,14 +79,14 @@ class ELMOConfig(Constants):
     batchSize = 2**3
     
     # classifier learning rate
-    classifierLearningRate = 0.001
+    classifierLearningRate = 1e-4
     
     numWorkers = 4
 
     # prediction learning rate
-    predictionLearningRate = 0.05
+    predictionLearningRate = 1e-4
     
-class ClassificationConfig(Constants):
+class ClassifierConfig(Constants):
     # Embeddding Size
     HiddenStateSize = 128
     
@@ -100,6 +100,6 @@ class ClassificationConfig(Constants):
     bidirectional = True
     
     # batch size 
-    batchSize = 16    
+    batchSize = 32    
     # epochs
-    epochs = 8
+    epochs = 20

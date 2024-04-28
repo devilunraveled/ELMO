@@ -5,70 +5,20 @@ Below is the graph for the model accuracy on the test data, plotted vs the time 
 
 Model Accuracies : 
 
+Frozen Lambdas : $\lambda_{0} = 0.5203, \lambda_{1} = 0.0315, \lambda_{2} = 0.8535$
+Learned Lambdas : $\lambda_{0} = 1.6256, \lambda_{1} =  0.0126, \lambda_{2} 0.6851$
 
 \begin{table}[H]
     \centering
-\begin{tabular}{|c|c|c|}
+\begin{tabular}{|c|c|}
 \hline
-\textbf{Model} & \textbf{Context Size} & \textbf{Accuracy} \\
+\textbf{Aggregation} & \textbf{Accuracy} \\
 \hline
-SVD & 1 & 82.88\% \\
+ Trainable & 88.88\% \\
 \hline
-SVD & 2 & 85.24\% \\
+Frozen  & 87.24\% \\
 \hline
-SVD & 3 & 88.65\% \\
-\hline
-Word2Vec & 1 & 88.66\% \\
-\hline
-Word2Vec & 2 & 90.22\% \\
-\hline
-Word2Vec & 3 & 90.39\% \\
+General Function  & 89.65\% \\
 \hline
 \end{tabular}
 \end{table}
-
-Some ad
-
-\subsection*{Confusion Matrices}
-
-\subsubsection{SVD}
-
-\begin{figure}[H]
-\centering
-\begin{minipage}{0.3\textwidth}
-  \centering
-  \includesvg[width=\linewidth]{../results/confusionMatrix_SVD_256_1}
-  \caption{CS = 1}
-\end{minipage}%
-\begin{minipage}{0.3\textwidth}
-  \centering
-  \includesvg[width=\linewidth]{../results/confusionMatrix_SVD_256_2}
-  \caption{CS = 2}
-\end{minipage}%
-\begin{minipage}{0.3\textwidth}
-  \centering
-  \includesvg[width=\linewidth]{../results/confusionMatrix_SVD_256_3}
-  \caption{CS = 3}
-\end{minipage}
-\end{figure}
-
-\subsubsection{Word2Vec}
-
-\begin{figure}[H]
-\centering
-\begin{minipage}{0.3\textwidth}
-  \centering
-  \includesvg[width=\linewidth]{../results/confusionMatrix_W2V_256_1}
-  \caption{CS = 1}
-\end{minipage}%
-\begin{minipage}{0.3\textwidth}
-  \centering
-  \includesvg[width=\linewidth]{../results/confusionMatrix_W2V_256_2}
-  \caption{CS = 2}
-\end{minipage}%
-\begin{minipage}{0.3\textwidth}
-  \centering
-  \includesvg[width=\linewidth]{../results/confusionMatrix_W2V_256_3}
-  \caption{CS = 3}
-\end{minipage}
-\end{figure}

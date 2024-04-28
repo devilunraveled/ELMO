@@ -15,18 +15,6 @@ import seaborn as Seaborn
 def createDataPoints(sentence : tuple[str], mapping : bidict):
     return torch.tensor( [ mapping.get(word, mapping[Constants.unkToken]) for word in sentence ] )
 
-
-class RNNClassfierDatset(TorchDataset):
-    def __init__(self, data : list , mapping : bidict) -> None:
-        self.data = data
-        self.dataPoints = [(createDataPoints(sentence[1],mapping),sentence[0]) for sentence in alive_it(self.data, force_tty = True)]
-
-    def __len__(self):
-        return len(self.dataPoints)
-
-    def __getitem__(self, idx):
-        return self.dataPoints[idx]
-
 class PredictionDataset(TorchDataset):
     def __init__(self, sentences : list[tuple], indexing : bidict ) -> None:
         _, sentences = zip(*sentences)
@@ -47,10 +35,13 @@ def predictionCollate(batch : list[torch.Tensor]):
 
 class ELMO(BaseModule):
     def __init__(self,
-        mapping         : bidict,
+        mapping,
         ) -> None :
         
         super().__init__()
+        deviceString = "cuda" if torch.cuda.is_available() else "cpu"
+        print(f"Using {deviceString}.")
+        self.device = torch.device(deviceString)
         
         self.Embeddings = NeuralNetwork.Embedding(len(mapping), Constants.EmbeddingSize)
         
@@ -59,47 +50,54 @@ class ELMO(BaseModule):
         print(f"Creating LSTM layers of size : {ELMOConfig.hiddenStateSize}")
         self.predictionLayer = NeuralNetwork.Linear(Constants.EmbeddingSize, len(mapping))
 
-        self.LSTM1 = NeuralNetwork.LSTM(
+        self.LSTM1Forward = NeuralNetwork.LSTM(
             input_size = Constants.EmbeddingSize, 
             hidden_size = ELMOConfig.hiddenStateSize, 
-            bidirectional = True,
+            bidirectional = False,
             batch_first = True,
+            device = self.device
         )
-        self.LSTM2 = NeuralNetwork.LSTM(
-            input_size = Constants.EmbeddingSize, 
+        self.LSTM2Forward = NeuralNetwork.LSTM(
+            input_size = ELMOConfig.hiddenStateSize, 
             hidden_size = ELMOConfig.hiddenStateSize, 
-            bidirectional = True,
+            bidirectional = False,
             batch_first = True,
+            device = self.device
+        )
+
+        self.LSTM1Backward = NeuralNetwork.LSTM(
+            input_size = Constants.EmbeddingSize,
+            hidden_size = ELMOConfig.hiddenStateSize,
+            bidirectional = False,
+            batch_first = True,
+            device = self.device
+        )
+        self.LSTM2Backward = NeuralNetwork.LSTM(
+            input_size = ELMOConfig.hiddenStateSize,
+            hidden_size = ELMOConfig.hiddenStateSize,
+            bidirectional = False,
+            batch_first = True,
+            device = self.device
         )
         
-        self.Optimizer = Optimizer.Adam(self.parameters(), lr = ELMOConfig.predictionLearningRate)
-        self.LossFunction = NeuralNetwork.CrossEntropyLoss(ignore_index = 0)
-
-        deviceString = "cuda" if torch.cuda.is_available() else "cpu"
-        print(f"Using {deviceString}.")
-        self.device = torch.device(deviceString)
         self.to(self.device)
         
-    def reformatHiddenStates(self, hiddenStates) :
-        forwardStates = hiddenStates[:, :-1, :ELMOConfig.hiddenStateSize]
-        backwardStates = hiddenStates[:, 1:, ELMOConfig.hiddenStateSize:]
-
-        shape = hiddenStates.shape[0],1,ELMOConfig.hiddenStateSize
-
-        forwardStates = torch.cat( (torch.zeros(shape).to(self.device), forwardStates), dim = 1 )
-        backwardStates = torch.cat( (backwardStates, torch.zeros(shape).to(self.device)), dim = 1 )
-        
-        return torch.cat( (forwardStates, backwardStates), dim = 2 )
-    
     def getEmbeddings(self, sentence):
         e0 = self.Embeddings(sentence)
-        e1 = self.LSTM1(e0)[0]
-        e2 = self.LSTM2(e1)[0]
+        
+        fe1 = self.LSTM1Forward(e0)[0]
+        fe2 = self.LSTM2Forward(fe1)[0]
+        
+        be1 = self.LSTM1Backward(e0.flip(dims = (1,2)))[0]
+        be2 = self.LSTM2Backward(be1.flip(dims = (1,2)))[0]
+        
+        e1 = torch.cat( (fe1, be1), dim = 2)
+        e2 = torch.cat( (fe2, be2), dim = 2)
+
         return e0, e1, e2
 
     def forward(self, sentence):
         _, _, out = self.getEmbeddings(sentence)
-        out = self.reformatHiddenStates(out)
         out = out.view(-1, out.shape[2])
         out = self.predictionLayer(out)
         return out
@@ -108,82 +106,6 @@ class ELMO(BaseModule):
         with torch.no_grad():
             return self.getEmbeddings(semtence)
 
-# class Classification(BaseModule):
-#     def __init__(self, mapping : bidict, trainData : list[tuple], testData : list[tuple]) -> None:
-#         super().__init__()
-#
-#         self.model = ELMO(mapping=mapping, trainSentences=trainData, testSentences=testData)
-#         self.gamma = NeuralNetwork.Parameter(torch.rand(3, requires_grad = True))
-#         self.bias = NeuralNetwork.Parameter(torch.zeroes(1, requires_grad = True))
-#         
-#         self.LSTM = NeuralNetwork.LSTM(
-#             input_size = Constants.EmbeddingSize,
-#             hidden_size = ELMOConfig.hiddenStateSize,
-#             bidirectional = True,
-#             batch_first = True,
-#             num_layers = 2
-#         )
-#          
-#     def evaluation(self):
-#         if not hasattr(self, 'testDataset') :
-#             print("No test data found. Skipping evaluation.")
-#             return 0.0 
-#         
-#         correct = 0
-#         predicted = []
-#         actual = []
-#         with torch.no_grad():
-#             for y,x in self.testDataset:
-#                 x = x.squeeze(2)
-#                 x = x.to(self.device)
-#                 y = y.to(self.device)
-#                 y_hat = self.forward(x)
-#                 y_hat = torch.argmax(y_hat)
-#                 y = torch.argmax(y)
-#                 predicted.append(y_hat.cpu().detach().numpy())
-#                 actual.append(y.cpu().detach().numpy())
-#                 correct += (y_hat == y)
-#
-#         self.confusionMatrix = ConfusionMatrix(actual, predicted)
-#         return float(correct*100/ len(self.testDataset))
-#
-#     def forward(self, sentence):
-#         e0, e1, e2  = self.model.getFrozenEmbeddings(sentence)
-#         embedding = e0*self.gamma[0] + e1*self.gamma[1] + e2*self.gamma[2] + self.bias
-#         out, _ = self.LSTM(embedding)
-#         return out
-#     
-#     def customCollate(self, batch):
-#         # Extract sequences and labels from the batch
-#         sequences, labels = zip(*batch)
-#         # Pad sequences to the length of the longest sequence
-#         paddedSequences = NeuralNetwork.utils.rnn.pad_sequence(sequences, batch_first=True, padding_value=-1)
-#         # Convert labels to tensor
-#         paddedLabels = NeuralNetwork.utils.rnn.pad_sequence(labels, batch_first=True)
-#         return paddedSequences, paddedLabels
-#     
-#     def saveModel(self, fileName):
-#         savePathFile = Structure.modelPath + fileName
-#         torch.save(self.state_dict(), savePathFile)
-#         print(f"Saved model to {savePathFile}.")
-#
-#     def loadModel(self, fileName):
-#         savePathFile = Structure.modelPath + fileName
-#         self.load_state_dict(torch.load(savePathFile), strict=False)
-#         print(f"Loaded model from {savePathFile}.")
-#     
-#     def getConfusionMatrix(self, predictedLabels, actualLabels):
-#         self.confusionMatrix = ConfusionMatrix(actualLabels, predictedLabels)
-#         return self.confusionMatrix
-#     
-#     def plotConfusionMatrix(self, name):
-#         Seaborn.heatmap(self.confusionMatrix, annot=True, cmap="Blues", fmt='d')
-#         Plot.xlabel("Predicted")
-#         Plot.ylabel("Actual")
-#         Plot.title("Confusion Matrix")
-#         Plot.tight_layout()
-#         Plot.savefig(Structure.resultsPath + f"confusionMatrix_{name}.svg", format="svg")
-#         Plot.show()
 #     
 #
 #

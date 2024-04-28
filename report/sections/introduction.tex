@@ -1,4 +1,7 @@
 \section*{Introduction}
 \label{sec:introduction}
+In this detailed report, I meticulously document my journey implementing the ELMO model, a cutting-edge technique in natural language processing. Exploring its complex architecture and contextual word embeddings, I navigate through the training process, sharing the methodologies used and challenges faced. Through evaluating its performance across diverse NLP tasks, I highlight both strengths and limitations. 
 
-The purpose of this assignment is to find the differences between the \verb|word2Vec| and the \verb|SVD| methods to generate dense word representations from a given corpus. Finally, from the obtained embeddings, I train a classifier on the Downstream task of sentence label prediction using a bidirectional LSTM, which helps in providing a clear analysis of the various methods and their corresponding pros and cons.
+We also train the model on a downstream classification task, combining the embeddings in several possible ways.
+
+For the learnable function, I use a single hidden layer with relu sigmoid activation.

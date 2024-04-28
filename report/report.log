@@ -1,6 +1,6 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2024.2.25)  30 MAR 2024 22:52
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2024.2.25)  26 APR 2024 00:01
 entering extended mode
- \write18 enabled.
+ restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
 **report.tex
@@ -215,21 +215,7 @@ Package pdftexcmds Info: \pdfdraftmode found.
 Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 ) (/usr/share/texmf-dist/tex/latex/tools/shellesc.sty
 Package: shellesc 2019/11/08 v1.0c unified shell escape interface for LaTeX
-Package shellesc Info: Unrestricted shell escape enabled on input line 75.
-) (/usr/share/texmf-dist/tex/latex/ifplatform/ifplatform.sty
-Package: ifplatform 2017/10/13 v0.4a Testing for the operating system
- (/usr/share/texmf-dist/tex/generic/catchfile/catchfile.sty
-Package: catchfile 2019/12/09 v1.8 Catch the contents of a file (HO)
- (/usr/share/texmf-dist/tex/generic/etexcmds/etexcmds.sty
-Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
-)) (/usr/share/texmf-dist/tex/generic/iftex/ifluatex.sty
-Package: ifluatex 2019/10/25 v1.5 ifluatex legacy package. Use iftex instead.
-)
-runsystem(uname -s > "report.w18")...executed.
-
- (./report.w18)
-runsystem(rm -- "report.w18")...executed.
-
+Package shellesc Info: Restricted shell escape enabled on input line 77.
 )
 \c@svg@param@lastpage=\count287
 \svg@box=\box58
@@ -261,14 +247,14 @@ Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
 \pgfutil@everybye=\toks24
 \pgfutil@tempdima=\dimen172
 \pgfutil@tempdimb=\dimen173
-)
-(/usr/share/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def
+) (/usr/share/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def
 \pgfutil@abb=\box59
 ) (/usr/share/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.tex (/usr/share/texmf-dist/tex/generic/pgf/pgf.revision.tex)
 Package: pgfrcs 2023-01-15 v3.1.10 (3.1.10)
 )) (/usr/share/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.code.tex
 Package: pgfsys 2023-01-15 v3.1.10 (3.1.10)
- (/usr/share/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex
+
+(/usr/share/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex
 \pgfkeys@pathtoks=\toks25
 \pgfkeys@temptoks=\toks26
  (/usr/share/texmf-dist/tex/generic/pgf/utilities/pgfkeyslibraryfiltered.code.tex
@@ -362,20 +348,20 @@ LaTeX Warning: Unused global option(s):
 (./report.aux)
 \openout1 = `report.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 70.
-LaTeX Font Info:    ... okay on input line 70.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 70.
-LaTeX Font Info:    ... okay on input line 70.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 70.
-LaTeX Font Info:    ... okay on input line 70.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 70.
-LaTeX Font Info:    ... okay on input line 70.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 70.
-LaTeX Font Info:    ... okay on input line 70.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 70.
-LaTeX Font Info:    ... okay on input line 70.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 70.
-LaTeX Font Info:    ... okay on input line 70.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
 \c@lstlisting=\count299
  (/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -405,96 +391,20 @@ Package grfext Info: Graphics extension search list:
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 )) [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./sections/introduction.tex) (./sections/svd.tex [1]) (./sections/word2vec.tex
-Overfull \hbox (16.39198pt too wide) in paragraph at lines 8--9
-\OT1/cmr/m/n/10 The ar-chi-tec-ture of the word2vec is straight-for-ward, I use two em-bed-ding lay-ers, one for the [][]\OT1/cmtt/m/n/10 targetEmbedding
- []
-
-[2]) (./sections/result.tex [3]
-Package svg Info: Last page of `./svg-inkscape/confusionMatrix_SVD_256_1_svg-tex.pdf' is 1 on input line 62.
- (./svg-inkscape/confusionMatrix_SVD_256_1_svg-tex.pdf_tex
-<./svg-inkscape/confusionMatrix_SVD_256_1_svg-tex.pdf, id=30, page=1, 462.52798pt x 346.89601pt>
-File: ./svg-inkscape/confusionMatrix_SVD_256_1_svg-tex.pdf Graphic file (type pdf)
-<use ./svg-inkscape/confusionMatrix_SVD_256_1_svg-tex.pdf, page 1>
-Package pdftex.def Info: ./svg-inkscape/confusionMatrix_SVD_256_1_svg-tex.pdf , page1 used on input line 56.
-(pdftex.def)             Requested size: 135.89174pt x 101.92056pt.
-)
-Package svg Info: Last page of `./svg-inkscape/confusionMatrix_SVD_256_2_svg-tex.pdf' is 1 on input line 67.
- (./svg-inkscape/confusionMatrix_SVD_256_2_svg-tex.pdf_tex
-<./svg-inkscape/confusionMatrix_SVD_256_2_svg-tex.pdf, id=32, page=1, 462.52798pt x 346.89601pt>
-File: ./svg-inkscape/confusionMatrix_SVD_256_2_svg-tex.pdf Graphic file (type pdf)
-<use ./svg-inkscape/confusionMatrix_SVD_256_2_svg-tex.pdf, page 1>
-Package pdftex.def Info: ./svg-inkscape/confusionMatrix_SVD_256_2_svg-tex.pdf , page1 used on input line 56.
-(pdftex.def)             Requested size: 135.89174pt x 101.92056pt.
-)
-Package svg Info: Last page of `./svg-inkscape/confusionMatrix_SVD_256_3_svg-tex.pdf' is 1 on input line 72.
- (./svg-inkscape/confusionMatrix_SVD_256_3_svg-tex.pdf_tex
-<./svg-inkscape/confusionMatrix_SVD_256_3_svg-tex.pdf, id=34, page=1, 462.52798pt x 346.89601pt>
-File: ./svg-inkscape/confusionMatrix_SVD_256_3_svg-tex.pdf Graphic file (type pdf)
-<use ./svg-inkscape/confusionMatrix_SVD_256_3_svg-tex.pdf, page 1>
-Package pdftex.def Info: ./svg-inkscape/confusionMatrix_SVD_256_3_svg-tex.pdf , page1 used on input line 56.
-(pdftex.def)             Requested size: 135.89174pt x 101.92056pt.
-)
-Package svg Info: Last page of `./svg-inkscape/confusionMatrix_W2V_256_1_svg-tex.pdf' is 1 on input line 83.
- (./svg-inkscape/confusionMatrix_W2V_256_1_svg-tex.pdf_tex
-<./svg-inkscape/confusionMatrix_W2V_256_1_svg-tex.pdf, id=36, page=1, 462.52798pt x 346.89601pt>
-File: ./svg-inkscape/confusionMatrix_W2V_256_1_svg-tex.pdf Graphic file (type pdf)
-<use ./svg-inkscape/confusionMatrix_W2V_256_1_svg-tex.pdf, page 1>
-Package pdftex.def Info: ./svg-inkscape/confusionMatrix_W2V_256_1_svg-tex.pdf , page1 used on input line 56.
-(pdftex.def)             Requested size: 135.89174pt x 101.92056pt.
-)
-Package svg Info: Last page of `./svg-inkscape/confusionMatrix_W2V_256_2_svg-tex.pdf' is 1 on input line 88.
- (./svg-inkscape/confusionMatrix_W2V_256_2_svg-tex.pdf_tex
-<./svg-inkscape/confusionMatrix_W2V_256_2_svg-tex.pdf, id=38, page=1, 462.52798pt x 346.89601pt>
-File: ./svg-inkscape/confusionMatrix_W2V_256_2_svg-tex.pdf Graphic file (type pdf)
-<use ./svg-inkscape/confusionMatrix_W2V_256_2_svg-tex.pdf, page 1>
-Package pdftex.def Info: ./svg-inkscape/confusionMatrix_W2V_256_2_svg-tex.pdf , page1 used on input line 56.
-(pdftex.def)             Requested size: 135.89174pt x 101.92056pt.
-)
-Package svg Info: Last page of `./svg-inkscape/confusionMatrix_W2V_256_3_svg-tex.pdf' is 1 on input line 93.
- (./svg-inkscape/confusionMatrix_W2V_256_3_svg-tex.pdf_tex
-<./svg-inkscape/confusionMatrix_W2V_256_3_svg-tex.pdf, id=40, page=1, 462.52798pt x 346.89601pt>
-File: ./svg-inkscape/confusionMatrix_W2V_256_3_svg-tex.pdf Graphic file (type pdf)
-<use ./svg-inkscape/confusionMatrix_W2V_256_3_svg-tex.pdf, page 1>
-Package pdftex.def Info: ./svg-inkscape/confusionMatrix_W2V_256_3_svg-tex.pdf , page1 used on input line 56.
-(pdftex.def)             Requested size: 135.89174pt x 101.92056pt.
-)) (./sections/conclusion.tex
-Package svg Info: Last page of `./svg-inkscape/graphPerformance_svg-tex.pdf' is 1 on input line 10.
- (./svg-inkscape/graphPerformance_svg-tex.pdf_tex
-<./svg-inkscape/graphPerformance_svg-tex.pdf, id=42, page=1, 722.7pt x 433.62pt>
-File: ./svg-inkscape/graphPerformance_svg-tex.pdf Graphic file (type pdf)
-<use ./svg-inkscape/graphPerformance_svg-tex.pdf, page 1>
-Package pdftex.def Info: ./svg-inkscape/graphPerformance_svg-tex.pdf , page1 used on input line 56.
-(pdftex.def)             Requested size: 226.48395pt x 135.88966pt.
-) [4 <./svg-inkscape/confusionMatrix_SVD_256_1_svg-tex.pdf> <./svg-inkscape/confusionMatrix_SVD_256_2_svg-tex.pdf
-
-pdfTeX warning: pdflatex (file ./svg-inkscape/confusionMatrix_SVD_256_2_svg-tex.pdf): PDF inclusion: multiple pdfs with page group included in a single page
-> <./svg-inkscape/confusionMatrix_SVD_256_3_svg-tex.pdf
-
-pdfTeX warning: pdflatex (file ./svg-inkscape/confusionMatrix_SVD_256_3_svg-tex.pdf): PDF inclusion: multiple pdfs with page group included in a single page
-> <./svg-inkscape/confusionMatrix_W2V_256_1_svg-tex.pdf
-
-pdfTeX warning: pdflatex (file ./svg-inkscape/confusionMatrix_W2V_256_1_svg-tex.pdf): PDF inclusion: multiple pdfs with page group included in a single page
-> <./svg-inkscape/confusionMatrix_W2V_256_2_svg-tex.pdf
-
-pdfTeX warning: pdflatex (file ./svg-inkscape/confusionMatrix_W2V_256_2_svg-tex.pdf): PDF inclusion: multiple pdfs with page group included in a single page
-> <./svg-inkscape/confusionMatrix_W2V_256_3_svg-tex.pdf
-
-pdfTeX warning: pdflatex (file ./svg-inkscape/confusionMatrix_W2V_256_3_svg-tex.pdf): PDF inclusion: multiple pdfs with page group included in a single page
->]) [5 <./svg-inkscape/graphPerformance_svg-tex.pdf>] (./report.aux) ) 
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./sections/introduction.tex) (./sections/result.tex) (./sections/conclusion.tex) [1] (./report.aux) ) 
 Here is how much of TeX's memory you used:
- 9395 strings out of 477985
- 166421 string characters out of 5840058
- 1925388 words of memory out of 5000000
- 29335 multiletter control sequences out of 15000+600000
- 519918 words of font info for 59 fonts, out of 8000000 for 9000
+ 8640 strings out of 477985
+ 152429 string characters out of 5840058
+ 1856388 words of memory out of 5000000
+ 28644 multiletter control sequences out of 15000+600000
+ 518272 words of font info for 53 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 94i,12n,92p,544b,1824s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on report.pdf (6 pages, 384150 bytes).
+ 94i,11n,92p,544b,262s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb>
+Output written on report.pdf (2 pages, 94696 bytes).
 PDF statistics:
- 466 PDF objects out of 1000 (max. 8388607)
- 297 compressed objects within 3 object streams
+ 54 PDF objects out of 1000 (max. 8388607)
+ 33 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 83 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

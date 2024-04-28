@@ -18,4 +18,4 @@ source env/bin/activate
 
 pip install -r requirements.txt
 
-python test.ju.py
+python classification.ju.py
